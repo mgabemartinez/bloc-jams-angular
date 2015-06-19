@@ -1,0 +1,67 @@
+{
+  "author": "Bloc",
+  "name": "bloc-rdio-skeleton",
+  "description": "Starter skeleton for Bloc's Rdio project.",
+  "version": "0.0.1",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bloc/bloc-jamz-checkpoint-outline"
+  },
+  "engines": {
+    "node": "0.10"
+  },
+  "scripts": {
+    "start": "brunch watch --server",
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "test": "karma start test/karma.conf.js"
+  },
+  "dependencies": {
+    "tmp": "0.0.23",
+    "brunch": "1.7.13",
+    "javascript-brunch": "1.5",
+    "coffee-script-brunch": "1.5",
+    "css-brunch": "1.5",
+    "stylus-brunch": "1.5",
+    "jade": "1.3",
+    "sass-brunch": "1.8.0",
+    "clean-css-brunch": "1.5",
+    "coffeelint-brunch": "1.5",
+    "ugly-blanket-brunch": "~1.5.3",
+    "async": "0.2",
+    "socket.io": "0.9",
+    "express": "3.4",
+    "debug": "~0.7.2",
+    "ansi-color": "0.2",
+    "date-utils": "1.2",
+    "cordell": "0.1",
+    "growl": "*",
+    "cordell": "*",
+    "consolidate": "*",
+    "ejs": "*",
+    "mongoose": "*",
+    "underscore": "*",
+    "express-resource": "*",
+    "express-namespace": "*",
+    "passport-local": "*",
+    "passport": "*",
+    "bower": "1.3.8"
+  },
+  
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "sinon": "*",
+    "sinon-chai": "*",
+    "supertest": "*",
+    "blanket": "*",
+    "auto-reload-brunch": "1.7",
+    "karma": "~0.12.16",
+    "karma-ng-scenario": "~0.1.0",
+    "karma-mocha": "~0.1.3",
+    "karma-chrome-launcher": "~0.1.4",
+    "karma-growl-reporter": "~0.1.1",
+    "karma-chai": "~0.1.0",
+    "karma-requirejs": "~0.2.2"
+  }
+}
