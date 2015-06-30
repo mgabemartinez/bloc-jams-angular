@@ -423,7 +423,8 @@ blocJams.controller('Album.controller', ['$scope', 'SongPlayer', function($scope
    };
 
   $scope.playSong = function(song) {
-    SongPlayer.setSong($scope.album, song);
+    SongPlayer.setSong($scope.album, song)
+
   };
 
   $scope.pauseSong = function(song) {
@@ -470,7 +471,7 @@ blocJams.service('SongPlayer', function() {
       this.setSong(this.currentAlbum, song);     
       },
 
-    previous: function() {
+    previous: function() {this.play();
        var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
        currentTrackIndex--;
        if (currentTrackIndex < 0) {
@@ -491,14 +492,60 @@ blocJams.service('SongPlayer', function() {
         formats: [ "mp3"],
         preload: true
       });
-
       this.play();
+      
     }
   };
 });
 
 
+//// Slider ////
 
+blocJams.directive('slider', function(){
+
+  var updateSeekPercentage = function($seekBar, event) {
+     var barWidth = $seekBar.width();
+     var offsetX =  event.pageX - $seekBar.offset().left;
+ 
+     var offsetXPercent = (offsetX  / $seekBar.width()) * 100;
+     offsetXPercent = Math.max(0, offsetXPercent);
+     offsetXPercent = Math.min(100, offsetXPercent);
+ 
+     var percentageString = offsetXPercent + '%';
+     $seekBar.find('.fill').width(percentageString);
+     $seekBar.find('.thumb').css({left: percentageString});
+   }
+
+  return {
+    templateUrl: '/templates/directives/slider.html', // We'll create these files shortly.
+    replace: true,
+    restrict: 'E',
+    link: function(scope, element, attributes) {
+ 
+      var $seekBar = $(element);
+ 
+      $seekBar.click(function(event) {
+        updateSeekPercentage($seekBar, event);
+      });
+ 
+      $seekBar.find('.thumb').mousedown(function(event){
+        $seekBar.addClass('no-animate');
+ 
+        $(document).bind('mousemove.thumb', function(event){
+          updateSeekPercentage($seekBar, event);
+        });
+ 
+        //cleanup
+        $(document).bind('mouseup.thumb', function(){
+          $seekBar.removeClass('no-animate');
+          $(document).unbind('mousemove.thumb');
+          $(document).unbind('mouseup.thumb');
+        });
+ 
+      });
+    }
+  };
+});
 
 
 
