@@ -14,11 +14,11 @@
    albumArtUrl: '/images/album-placeholder.png',
  
    songs: [
-      { name: 'Traveler', length: 263.38, audioUrl: '/music/placeholders/Traveler' }, 
-      { name: 'Dreamreader', length: 205.66, audioUrl: '/music/placeholders/Dreamreader' },
-      { name: 'Mala', length: 370.14, audioUrl: '/music/placeholders/Mala' },
-      { name: 'Gold', length: 254.81, audioUrl: '/music/placeholders/Gold' },
-      { name: 'Above', length: 475.92, audioUrl: '/music/placeholders/Above' }
+      { name: 'Traveler', length: 276.00, audioUrl: '/music/placeholders/Traveler' }, 
+      { name: 'Dreamreader', length: 266.00, audioUrl: '/music/placeholders/Dreamreader' },
+      { name: 'Mala', length: 276.00, audioUrl: '/music/placeholders/Mala' },
+      { name: 'Gold', length: 382.00, audioUrl: '/music/placeholders/Gold' },
+      { name: 'Above', length: 426.00, audioUrl: '/music/placeholders/Above' }
      ]
  };
 
@@ -138,11 +138,17 @@ blocJams.controller('Album.controller', ['$scope', 'SongPlayer', function($scope
 
 blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
   $scope.songPlayer = SongPlayer;
+
+  SongPlayer.onTimeUpdate(function(event, time){
+    $scope.$apply(function(){
+      $scope.playTime = time;
+    });
+  });
 }]);
  
 
 
-blocJams.service('SongPlayer', function() {
+blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
   var currentSoundFile = null;
 
   var trackIndex = function(album, song) {
@@ -192,21 +198,31 @@ blocJams.service('SongPlayer', function() {
       }
     },
 
+    onTimeUpdate: function(callback) {
+      return $rootScope.$on('sound:timeupdate', callback);
+    },
+
     setSong: function(album, song) {
       if (currentSoundFile) {
         currentSoundFile.stop();
       }
       this.currentAlbum = album;
       this.currentSong = song;
+
+
       currentSoundFile = new buzz.sound(song.audioUrl, {
         formats: [ "mp3"],
         preload: true
       });
-      this.play();
-      
+
+      currentSoundFile.bind('timeupdate', function(e){
+        $rootScope.$broadcast('sound:timeupdate', this.getTime());
+      });
+
+      this.play();    
     }
   };
-});
+}]);
 
 
 //// Slider ////
@@ -224,17 +240,17 @@ blocJams.directive('slider', ['$document', function($document){
   }
    
   var numberFromValue = function(value, defaultValue) {
-     if (typeof value === 'number') {
-       return value;
-     }
+    if (typeof value === 'number') {
+      return value;
+    }
  
-     if(typeof value === 'undefined') {
-       return defaultValue;
-     }
+    if(typeof value === 'undefined') {
+      return defaultValue;
+    }
  
-     if(typeof value === 'string') {
-       return Number(value);
-     }
+    if(typeof value === 'string') {
+      return Number(value);
+    }
   }
 
   return {
@@ -302,6 +318,35 @@ blocJams.directive('slider', ['$document', function($document){
     }
   };
 }]);
+
+blocJams.filter('timecode', function(){
+   return function(seconds) {
+     seconds = Number.parseFloat(seconds);
+ 
+     // Returned when no time is provided.
+     if (Number.isNaN(seconds)) {
+       return '-:--';
+     }
+ 
+     // make it a whole number
+     var wholeSeconds = Math.floor(seconds);
+ 
+     var minutes = Math.floor(wholeSeconds / 60);
+ 
+     remainingSeconds = wholeSeconds % 60;
+ 
+     var output = minutes + ':';
+ 
+     // zero pad seconds, so 9 seconds should be :09
+     if (remainingSeconds < 10) {
+       output += '0';
+     }
+ 
+     output += remainingSeconds;
+ 
+     return output;
+   }
+  })
 
 blocJams.directive('click-me', function() {
   return {
