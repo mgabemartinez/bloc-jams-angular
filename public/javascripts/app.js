@@ -516,6 +516,10 @@ blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
       this.volume = volume;
     },
 
+    muteVolume: function () {
+      currentSoundFile.toggleMute();
+    },
+
     setSong: function(album, song) {
       if (currentSoundFile) {
         currentSoundFile.stop();
@@ -576,6 +580,7 @@ blocJams.directive('slider', ['$document', function($document){
     scope: {
       onChange: '&'
     },
+    
     link: function(scope, element, attributes) {
       scope.value = 0;
       scope.max = 100;

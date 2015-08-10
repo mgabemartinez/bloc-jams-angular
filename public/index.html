@@ -3,34 +3,66 @@
 <html ng-app="BlocJams">
   <head>
     <title>Bloc Jams</title>
+
+    
+    <!-- CSS Reset -->
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.1/build/cssreset/cssreset-min.css">
+    
+    <!-- google fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,600,700,300' rel='stylesheet' type='text/css'>
+    
+    <!-- Bootstrap-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+    
+    <!-- Font Awesome -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- JQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+   
+    <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    
+    <!-- UI Router -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.min.js"></script>
+
+    <!-- Buzz -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/buzz/1.1.0/buzz.min.js"></script>
+    
+    
+
     <script src="/javascripts/vendor.js"></script>
     <script src="/javascripts/app.js"></script>
     <script>
       require('scripts/app');
     </script>
+
   </head>
 
   <body>
-      <nav class="player-header-nav navbar">
+
+
+      <nav class="player-header-nav">
+        
         <div class="container">
+
           <div class='navbar-header'> <!-- Nav Bar -->
+            
             <a ui-sref='landing' class='logo navbar-left'>
               <img src="/images/blocjams.png">
             </a>
+
           </div>
+
           <ul class="nav navbar-nav navbar-right">
             <li><a ui-sref='collection'>Library</a></li>
           </ul>
+
         </div>
+
       </nav>
 
       <div ui-view></div>

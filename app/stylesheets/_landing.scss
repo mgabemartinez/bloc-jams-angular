@@ -1,12 +1,11 @@
 .hero-content {
-  
-  padding: 100px 0;
-  background-image: url("../images/bloc-hero-image.jpg");
-  background-repeat: no-repeat;
-  min-height: 635px;
+  background-image: url("/images/bloc-hero-image.jpg");
 
-  background-size: 100%;
-  
+  top: 0;
+  height: 92.5vh;
+  background-size: cover;
+  margin: 0 auto;
+  padding: 0;
 
 }
 
@@ -17,12 +16,14 @@
   background-color: #eb5cb6;
   width: 350px;
   padding: 20px;
+  margin-top: 100px;
   margin-bottom: 50px;
   font-weight: 300;
 }
 
-hero-content h3 {
+.hero-content h3 {
   background-color: #eb5cb6;
+
   width: 350px;
   padding: 20px;
 }

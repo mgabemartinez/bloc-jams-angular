@@ -1,9 +1,10 @@
 .hero-content {
-  padding: 100px 0;
-  background-image: url("../images/bloc-hero-image.jpg");
-  background-repeat: no-repeat;
-  min-height: 635px;
-  background-size: 100%; }
+  background-image: url("/images/bloc-hero-image.jpg");
+  top: 0;
+  height: 92.5vh;
+  background-size: cover;
+  margin: 0 auto;
+  padding: 0; }
 
 .hero-content h1 {
   font-size: 70px;
@@ -12,10 +13,11 @@
   background-color: #eb5cb6;
   width: 350px;
   padding: 20px;
+  margin-top: 100px;
   margin-bottom: 50px;
   font-weight: 300; }
 
-hero-content h3 {
+.hero-content h3 {
   background-color: #eb5cb6;
   width: 350px;
   padding: 20px; }
@@ -351,23 +353,24 @@ td.song-number {
 .no-right-gutter {
   padding-right: 0px; }
 
-html {
-  height: 100%; }
 
 body {
   font-family: 'Open Sans';
   color: white;
-  min-height: 100%;
   background: -webkit-radial-gradient(#292033, #41384d);
   background: radial-gradient(#292033, #41384d);
-  padding-bottom: 150px; }
+  margin: 0 auto; }
 
 body.landing {
   background: #41384d;
   padding-bottom: 0; }
 
 body.landing .navbar {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  margin: 0; }
+
+nav.navbar-header {
+  border: 2px solid blue; }
 
 .player-header-nav {
   background-color: #685480; }
@@ -384,6 +387,9 @@ h2 {
   background-color: #eb5cb6;
   width: 350px;
   padding: 20px; }
+
+body.container {
+  margin: 0; }
 
 
 /*# sourceMappingURL=app.css.map*/
